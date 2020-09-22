@@ -20,7 +20,7 @@ class Modulo {
 		friend std::ostream& operator<<(std::ostream& ost,Modulo& m);
 		friend std::ostream& operator>>(std::ostream& ost,Modulo& m);
 	private:
-		int compare(const int rhs);
+		int Modulo::compare(const int rhs);
 		int _value;
 		int _modulo;
 		int _offset;
