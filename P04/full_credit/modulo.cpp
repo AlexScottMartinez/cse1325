@@ -1,16 +1,33 @@
 #include "modulo.h"
 
+void set_nmsd(Modulo* nmsd){
+	*_nmsd = *nmsd;
+}
+int value(){
+	return this->_value;
+};
 Modulo& operator+=(int rhs){
-	return minutes = minutes + 30;
+	value = _value + rhs;
+	if (_value > _modulo){
+		++(*_nmsd);
+		_value = rhs + _modulo - _value;
+	}
+	return *this;
+}
 }
 Modulo operator+(int rhs){
-	return hour += 12;
+	
 }
 Modulo& operator++(){
-	return ++minutes;
+	
 }
 Modulo operator++(int ignored){
-	return std::cout << hour++;
+	++_value;
+	if(_value > _modulo){
+		++_nmsd;
+		_value = _offset;
+	}
+	return *this;
 }
 
 std::ostream& operator<<(std::ostream& ost,Modulo& m){

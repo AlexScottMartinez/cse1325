@@ -7,9 +7,9 @@ class Modulo {
 		Modulo(int modulo=10, int value=0, int offset=0);
 		void set_nmsd(Modulo* nmsd);
 		int value();
-		Modulo& operator+=(int rhs);
+		Modulo &operator+=(int rhs);
 		Modulo operator+(int rhs);
-		Modulo& operator++();
+		Modulo &operator++();
 		Modulo operator++(int ignored);
 		inline bool operator==(int rhs);
 		inline bool operator!=(int rhs); 
