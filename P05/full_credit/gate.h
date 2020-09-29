@@ -7,7 +7,7 @@ typedef bool Signal;
 class Gate {
 
     public:
-        Gate() :_input{true}, _input2{false} {};
+        Gate():_input1{true}, _input2{false} {};
         void connect(Gate& gate, Pin input_pin);
         void input(Pin pin, Signal signal);
         Signal input(Pin pin);
