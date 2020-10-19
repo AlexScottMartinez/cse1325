@@ -5,7 +5,7 @@
 Mainwin::Mainwin() : store{nullptr} {
 
     set_default_size(800, 200);
-    set_title("Mavs Arboreta, Nursery, and Green Association (MANGA)");
+    set_title("MANGA Mania");
 
     // Put a vertical box container as the Window contents
     Gtk::VBox *vbox = Gtk::manage(new Gtk::VBox);
@@ -49,19 +49,157 @@ Mainwin::Mainwin() : store{nullptr} {
     menuitem_mulch->signal_activate().connect([this] {this->on_new_mulch_click();});
     insertmenu->append(*menuitem_mulch);
 
+	display = Gtk::manage(new Gtk::Label());
+	display->set_hexpand(true);
+	display->set_vexpand(true);
+	vbox->add(*display);
 	vbox->show_all();
 }
 Mainwin::~Mainwin() { }
 
 void Mainwin::on_quit_click() {
-    close();
+	close();
 }
 void Mainwin::on_new_tool_click() {
-	close();
+	Gtk::Dialog dialog{"New Tool", *this};
+	Gtk::Grid grid;
+	Gtk::Label t_name{"Name"};
+	Gtk::Entry e_name;
+	grid.attach(t_name, 0, 0, 1, 1);
+	grid.attach(e_name, 1, 0, 2, 1);
+
+	Gtk::Label l_price{"Price"};
+	Gtk::Entry e_price;
+	grid.attach(l_price, 0, 1, 1, 1);
+	grid.attach(e_price, 1, 1, 2, 1);
+
+	Gtk::Label l_descr{"Description"};
+	Gtk::Entry e_descr;
+	grid.attach(l_descr, 0, 2, 1, 1);
+	grid.attach(e_descr, 1, 2, 2, 1);
+
+	dialog.get_content_area()->add(grid);
+
+	dialog.add_button("Select", Gtk::RESPONSE_OK);
+    dialog.add_button("Cancel", Gtk::RESPONSE_CANCEL);
+	int response;
+	dialog.show_all();
+	while((response = dialog.run()) == Gtk::RESPONSE_OK) {
+
+        // Data validation: If the user doesn't enter a name for the animal, complain
+        if (e_name.get_text().size() == 0) {e_name.set_text("*required*"); continue;}
+
+        // Otherwise, extract the information entered into the various widgets
+        std::string tool_info = e_name.get_text() + " (Stock #1,$ " +
+			e_price.get_text() + " \n"+ " \nDescrption: " + e_descr.get_text();
+
+         // Just display the information right back. In most applications, this is where you'd
+         //   create a new object and add it to a std::vector or other container
+         Gtk::MessageDialog{*this, "You entered: \n\n" + tool_info}.run();
+		break;
+    }
 }
 void Mainwin::on_new_plant_click() {
-	close();
+	Gtk::Dialog dialog{"New Plant", *this};
+	Gtk::Grid grid;
+	Gtk::Label t_name{"Name"};
+	Gtk::Entry e_name;
+	grid.attach(t_name, 0, 0, 1, 1);
+	grid.attach(e_name, 1, 0, 2, 1);
+
+	Gtk::Label l_price{"Price"};
+	Gtk::Entry e_price;
+	grid.attach(l_price, 0, 1, 1, 1);
+	grid.attach(e_price, 1, 1, 2, 1);
+
+	Gtk::Label l_descr{"Description"};
+	Gtk::Entry e_descr;
+	grid.attach(l_descr, 0, 2, 1, 1);
+	grid.attach(e_descr, 1, 2, 2, 1);
+
+	Gtk::Label l_species{"Species"};
+	Gtk::Entry e_species;
+	grid.attach(l_species, 0, 3, 1, 1);
+	grid.attach(e_species, 1, 3, 2, 1);
+
+	Gtk::Label l_exp{"Exposure"};
+	Gtk::Entry e_exp;
+	grid.attach(l_exp, 0, 4, 1, 1);
+	grid.attach(e_exp, 1, 4, 2, 1);
+
+	dialog.get_content_area()->add(grid);
+
+	dialog.add_button("Select", Gtk::RESPONSE_OK);
+    dialog.add_button("Cancel", Gtk::RESPONSE_CANCEL);
+	int response;
+	dialog.show_all();
+	while((response = dialog.run()) == Gtk::RESPONSE_OK) {
+
+        // Data validation: If the user doesn't enter a name for the animal, complain
+        if (e_name.get_text().size() == 0) {e_name.set_text("*required*"); continue;}
+
+        // Otherwise, extract the information entered into the various widgets
+        std::string plant_info = e_name.get_text() + " (Stock #1,$ " +
+			e_price.get_text() + " \n" + e_descr.get_text()
+			+ " \nSpecies: " + e_species.get_text() + " \nExposure: " + e_exp.get_text();
+
+         // Just display the information right back. In most applications, this is where you'd
+         //   create a new object and add it to a std::vector or other container
+         Gtk::MessageDialog{*this, "You entered \n\n" + plant_info}.run();
+		break;
+    }
 }
 void Mainwin::on_new_mulch_click() {
-	close();
+	Gtk::Dialog dialog{"New Mulch", *this};
+	Gtk::Grid grid;
+	Gtk::Label t_name{"Name"};
+	Gtk::Entry e_name;
+	grid.attach(t_name, 0, 0, 1, 1);
+	grid.attach(e_name, 1, 0, 2, 1);
+
+	Gtk::Label l_price{"Price"};
+	Gtk::Entry e_price;
+	grid.attach(l_price, 0, 1, 1, 1);
+	grid.attach(e_price, 1, 1, 2, 1);
+
+	Gtk::Label l_descr{"Description"};
+	Gtk::Entry e_descr;
+	grid.attach(l_descr, 0, 2, 1, 1);
+	grid.attach(e_descr, 1, 2, 2, 1);
+
+	Gtk::Label l_volume{"Volume"};
+	Gtk::Entry e_volume;
+	grid.attach(l_volume, 0, 3, 1, 1);
+	grid.attach(e_volume, 1, 3, 2, 1);
+
+	Gtk::Label l_material{"Material"};
+	Gtk::Entry e_material;
+	grid.attach(l_material, 0, 4, 1, 1);
+	grid.attach(e_material, 1, 4, 2, 1);
+
+	dialog.get_content_area()->add(grid);
+
+	dialog.add_button("Select", Gtk::RESPONSE_OK);
+    dialog.add_button("Cancel", Gtk::RESPONSE_CANCEL);
+	int response;
+	dialog.show_all();
+	while((response = dialog.run()) == Gtk::RESPONSE_OK) {
+
+        // Data validation: If the user doesn't enter a name for the animal, complain
+        if (e_name.get_text().size() == 0) {e_name.set_text("*required*"); continue;}
+
+        // Otherwise, extract the information entered into the various widgets
+        std::string mulch_info = e_name.get_text() + " (Stock #1,$ " +
+			e_price.get_text() + " \n" + e_descr.get_text()
+			+ " \nVolume: " + e_volume.get_text() + " \nMaterial: " + e_material.get_text();
+
+         // Just display the information right back. In most applications, this is where you'd
+         //   create a new object and add it to a std::vector or other container
+         Gtk::MessageDialog{*this, "You entered \n\n" + mulch_info}.run();
+		break;
+    }
 }
+void Mainwin::on_view_products_click() {
+
+}
+
