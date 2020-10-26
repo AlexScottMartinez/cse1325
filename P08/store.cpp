@@ -7,9 +7,23 @@ void Store::add_product(const Plant& product) {_products.push_back(new Plant{pro
 void Store::add_product(const Mulch& product) {_products.push_back(new Mulch{product});}
 int Store::products() {return _products.size();}
 const Product& Store:: product(int index) {return *_products.at(index);}
-void Store::save(std::ostream& ost) {
 
+void Store::save(std::ostream& ost) {
+	ost << _name << std::endl;
+	for (Product* p : _products) {
+		p->save(ost);
+	}
+	
 }
 Store::Store(std::istream& ist) {
+	getline(ist, _name);
+ 	int size;
 
+  	ist >> size;
+  	for (int i=0; i<size; ++i) _products.push_back(new Product{ist});
+  		ist >> _name;
+	
 }
+
+std::string Store::get_filename() {return filename;}
+void Store::set_filename(std::string filename) {this->filename = filename;}

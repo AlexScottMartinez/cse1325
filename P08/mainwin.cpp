@@ -286,7 +286,12 @@ Gtk::FileChooserDialog dialog("Please choose a file",
 }
 
 void Mainwin::on_save_click() {
-
+	try {
+        std::ofstream ofs{store->get_filename()};
+        store->save(ofs);
+    	} catch(std::exception e) {
+        	Gtk::MessageDialog{*this, "Unable to save data", false, Gtk::MESSAGE_ERROR}.run();
+    }
 }
 
 

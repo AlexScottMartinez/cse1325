@@ -16,3 +16,12 @@ std::string to_string(Exposure exposure) {
     else throw std::out_of_range("Invalid Exposure value");
 }
 
+void Plant::save(std::ostream& ost) {
+	for (Plant* p : Plant) {
+    	ost << typeid(*p).name() << ' '; // Write the name of the actual type
+      	p->save(ost);
+      	ost << std::endl;  // one line per shape (this is ignored when loading)
+	}
+}
+
+Plant::Plant(std::istream& ist) : Product(ist) {}
