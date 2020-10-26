@@ -248,7 +248,7 @@ void Mainwin::on_open_click() {
             if(!ifs) throw std::runtime_error{"File contents bad"};
 			on_view_products_click();
 		} catch(std::exception e) {
-			Gtk::MessageDialog{*this, "Unable to open game"}.run();
+			Gtk::MessageDialog{*this, "Unable to open store"}.run();
 		}
 	}
 }
@@ -280,7 +280,7 @@ Gtk::FileChooserDialog dialog("Please choose a file",
 			store->save(ofs);
             if(!ofs) throw std::runtime_error{"Error writing file"};
 		} catch(std::exception e) {
-			Gtk::MessageDialog{*this, "Unable to save game"}.run();
+			Gtk::MessageDialog{*this, "Unable to save store"}.run();
 		}
 	}
 }

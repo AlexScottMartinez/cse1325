@@ -17,11 +17,9 @@ std::string to_string(Exposure exposure) {
 }
 
 void Plant::save(std::ostream& ost) {
-	for (Plant* p : Plant) {
-    	ost << typeid(*p).name() << ' '; // Write the name of the actual type
-      	p->save(ost);
-      	ost << std::endl;  // one line per shape (this is ignored when loading)
-	}
+	ost << "plant";
+	save(ost);
+	Product::save(ost);
 }
 
 Plant::Plant(std::istream& ist) : Product(ist) {}
