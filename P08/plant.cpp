@@ -20,6 +20,7 @@ void Plant::save(std::ostream& ost) {
 	ost << "plant";
 	save(ost);
 	Product::save(ost);
+	
 }
 
 Plant::Plant(std::istream& ist) : Product(ist) {}

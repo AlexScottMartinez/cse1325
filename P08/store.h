@@ -21,7 +21,7 @@ class Store {
     int products();
     const Product& product(int index);
 	Store(std::istream& ist);
-	void save(std::ostream& ost);
+	virtual void save(std::ostream& ost);
   protected:
     std::string filename;
   private:

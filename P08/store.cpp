@@ -10,6 +10,7 @@ const Product& Store:: product(int index) {return *_products.at(index);}
 
 void Store::save(std::ostream& ost) {
 	ost << _name << std::endl;
+	ost << _products.size() << std::endl;
 	for (Product* p : _products) {
 		p->save(ost);
 	}
@@ -17,6 +18,7 @@ void Store::save(std::ostream& ost) {
 }
 Store::Store(std::istream& ist) {
 	getline(ist, _name);
+	//getline(ist, new Tool{ist});
  	int size;
 
   	ist >> size;

@@ -1,5 +1,6 @@
 #include "mainwin.h"
 #include "entrydialog.h"
+#include <fstream>
 
 Mainwin::Mainwin() : store{nullptr}, display{new Gtk::Label{}} {
 
@@ -119,6 +120,7 @@ Mainwin::~Mainwin() { }
 void Mainwin::on_new_store_click() {
     delete store;
     store = new Store{"Untitled"};
+	on_view_products_click();
 }
 
 void Mainwin::on_new_tool_click() {
@@ -243,8 +245,6 @@ void Mainwin::on_open_click() {
 			delete store;
 			std::ifstream ifs{dialog.get_filename()};
 			store = new Store{ifs};
-			bool b;
-			ifs >> b;
             if(!ifs) throw std::runtime_error{"File contents bad"};
 			on_view_products_click();
 		} catch(std::exception e) {
@@ -271,7 +271,7 @@ Gtk::FileChooserDialog dialog("Please choose a file",
 	dialog.set_filename("untitled.manga");
 
 	dialog.add_button("_Cancel", 0);
-	dialog.add_button("_Open", 1);
+	dialog.add_button("_Save", 1);
 
 	int result = dialog.run();
 	if (result == 1) {
