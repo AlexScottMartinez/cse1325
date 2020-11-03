@@ -10,6 +10,7 @@ Customer::Customer(std::istream& ist) {
 }
 
 void Customer::save(std::ostream& ost) {
+	ost << "customer\n";
     ost << _name << std::endl;
     ost << _phone << std::endl;
     ost << _email << std::endl;

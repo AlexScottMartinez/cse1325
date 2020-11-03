@@ -11,6 +11,7 @@ Store::Store(std::istream& ist) {
         if(s == "tool") _products.push_back(new Tool(ist));
         else if(s == "plant") _products.push_back(new Plant(ist));
         else if(s == "mulch") _products.push_back(new Mulch(ist));
+		else if(s == "customer") _customers.push_back(new Customer(ist));
         else if(s.size()) throw std::runtime_error{"Invalid product type on input: " + s};
     }
 }
