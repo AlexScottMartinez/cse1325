@@ -1,5 +1,7 @@
 #include "store.h"
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 Store::Store(std::string name) : _name{name} { }
 Store::Store(std::istream& ist) {
@@ -19,6 +21,7 @@ Store::Store(std::istream& ist) {
     ist >> size; ist.ignore(32767, '\n');
     while(size-- > 0) {
         _customers.push_back(new Customer(ist));
+		std::sort(_customers.begin(), _customers.end());
     }
     
     ist >> size; ist.ignore(32767, '\n');
@@ -32,7 +35,10 @@ void Store::save(std::ostream& ost) {
     ost << _products.size() << '\n';
     for(Product* p : _products) p->save(ost);
     ost << _customers.size() << '\n';
-    for(Customer* c : _customers) c->save(ost);
+    for(Customer* c : _customers) {
+		std::sort(c.begin(), c.end());		
+		c->save(ost);
+	}
     ost << _orders.size() << '\n';
     for(Order* o : _orders) o->save(ost);
 }
@@ -44,8 +50,14 @@ void Store::add_product(const Mulch& product) {_products.push_back(new Mulch{pro
 int Store::products() {return _products.size();}
 Product& Store:: product(int index) {return *_products.at(index);}
 
-void Store::add_customer(const Customer& customer) {_customers.push_back(new Customer{customer});}
-int Store::customers() {return _customers.size();}
+void Store::add_customer(const Customer& customer) {
+	_customers.push_back(new Customer{customer});
+	std::sort(_customers.begin(), _customers.end());
+}
+int Store::customers() {
+	std::sort(_customers.begin(), _customers.end());
+	return _customers.size();
+}
 const Customer& Store::customer(int index) {return *_customers.at(index);}
 
 int Store::add_order(const Customer& customer) {
@@ -55,8 +67,9 @@ int Store::add_order(const Customer& customer) {
 void Store::add_item(int order, Product& product, int quantity) {
     _orders[order]->add_item(Item{product, quantity});
 }
-int Store::orders() {return _orders.size();}
-const Order& Store::order(int index) {return *_orders.at(index);}
-Store::iterator begin() {return i_orders.begin();}
-Store::iterator end() {return i_orders.end();}
+//int Store::orders() {return _orders.size();}
+//const Order& Store::order(int index) {return *_orders.at(index);}
+Store::iterator begin() {return orders.begin();}
+Store::iterator end() {return orders.end();}
+void Store::add_order(Order& order) {orders.push_back(order);}
 

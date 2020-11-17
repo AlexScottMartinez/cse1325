@@ -14,8 +14,8 @@ class Store {
     std::string _name;
     std::vector<Product*> _products;
 	std::vector<Customer*> _customers;
-    typedef std::vector<Order*>_orders;
-	_orders i_orders;
+    //typedef std::vector<Order*> _orders;
+	//_orders orders;
   public:
     Store(std::string name);
 	Store(std::istream& ist);
@@ -26,16 +26,19 @@ class Store {
     void add_product(const Mulch& product);
 	void add_customer(const Customer& customer);
     void add_item(int order, Product& product, int quantity);
+	//void add_order(Order& order);
 	void save(std::ostream& ost);
 
     int add_order(const Customer& customer);
     int products();
 	int customers();
-    int orders();
+    //int orders();
 
     Product& product(int index);
 	const Customer& customer(int index);
-    const Order& order(int index);
+    //const Order& order(int index);
+    typedef std::vector<Order*> _orders;
+	_orders orders;
 	typedef _orders::iterator iterator;
 	typedef _orders::const_iterator const_iterator;
 	iterator begin();

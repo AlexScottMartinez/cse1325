@@ -249,6 +249,8 @@ Mainwin::Mainwin() : store{nullptr}, display{new Gtk::Label{}}, filename{"untitl
     display->set_hexpand(true);
     display->set_vexpand(true);
     vbox->add(*display);
+	Gtk::VScrollbar *scrollbar = Gtk::manage(new Gtk::VScrollbar);
+	vbox->pack_start(*scrollbar, Gtk::PACK_SHRINK, 0);
 
     // S T A T U S   B A R   D I S P L A Y ////////////////////////////////////
     // Provide a status bar for game messages
