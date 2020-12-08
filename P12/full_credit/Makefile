@@ -10,5 +10,5 @@ mandelbrot.o: mandelbrot.cpp *.h
 	$(CXX) $(CXXFLAGS) -c mandelbrot.cpp -o mandelbrot.o
 
 clean:
-	rm -f *.o *.gch ~* a.out mandelbrot
+	rm -f *.o *.gch *~ a.out mandelbrot
 
